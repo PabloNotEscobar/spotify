@@ -1,0 +1,1 @@
+export {TracksPanel} from '@/widgets/trackslist/ui/TracksPanel'

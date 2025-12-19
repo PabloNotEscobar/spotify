@@ -1,0 +1,1 @@
+export type {IUser} from '@/entities/user/types/types'

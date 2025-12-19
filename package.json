@@ -1,26 +1,38 @@
 {
   "name": "spotify-fsd-next",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Spotify clone: Next.js (client) + NestJS (server) with FSD",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "next": "16.0.1"
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\" --names \"server,client\" --prefix \"[{name}]\"",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run start:dev",
+    "build": "npm run build:server && npm run build:client",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "start": "npm run build && concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:client": "cd client && npm run start",
+    "start:server": "cd server && npm run start:prod",
+    "lint": "npm run lint:client && npm run lint:server",
+    "lint:client": "cd client && npm run lint",
+    "lint:server": "cd server && npm run lint",
+    "type-check": "npm run type-check:client && npm run type-check:server",
+    "type-check:client": "cd client && tsc --noEmit",
+    "type-check:server": "cd server && tsc --noEmit"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.1"
+    "concurrently": "^8.2.0"
+  },
+  "keywords": [
+    "spotify",
+    "nextjs",
+    "nestjs",
+    "fsd",
+    "fullstack"
+  ],
+  "author": "Ты",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^5.0.5"
   }
 }

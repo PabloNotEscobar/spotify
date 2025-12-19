@@ -1,0 +1,22 @@
+::-webkit-scrollbar {
+    width: 12px;            /* ширина полосы */
+    background: transparent; /* пустота под ползунком */
+}
+
+::-webkit-scrollbar-button {
+    display: none; /* убираем стрелки */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #595959; /* ползунок */
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #c8c8c8; /* ползунок */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* делаем пустым */
+}

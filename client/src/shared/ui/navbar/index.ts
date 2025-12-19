@@ -1,0 +1,5 @@
+export {SpotifyIcon} from '@/shared/ui/navbar/SpotifyIcon'
+export {HomeIcon} from '@/shared/ui/navbar/HomeIcon'
+export {RightMenu} from '@/shared/ui/navbar/RightMenu'
+export {Search} from '@/shared/ui/navbar/Search'
+export {SearchIcon} from '@/shared/ui/navbar/SearchIcon'
