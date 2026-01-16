@@ -4,8 +4,11 @@ import React from "react";
 import {TogglePlayerPlayButton} from "@/features/player/togglePlayback";
 import {TrackProgressBar} from "@/shared/ui/player/TrackProgressBar";
 
+interface PlayerSettings {
+    changeCT: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
-export function PlayerSettings ({changeCT}: {changeCT: (e: React.ChangeEvent<HTMLInputElement>) => void}) {
+export function PlayerSettings ({changeCT}: PlayerSettings) {
 
     const currentTime = usePlayerStore(s => s.currentTime);
     const duration = usePlayerStore(s => s.duration);

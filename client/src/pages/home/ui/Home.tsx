@@ -1,10 +1,77 @@
 import {TracksPanel} from "@/widgets/trackslist";
 
-export function HomePage () {
+export function HomePage() {
     return (
-        <div className={"overflow-hidden flex-1 w-full h-full rounded-[8] bg-[#121212]"}>
-            <div className={"overflow-hidden flex-1 w-full h-full rounded-[8] bg-[#121212] pl-7"}>
-                <TracksPanel />
+        <div className={"w-full h-full px-7 overflow-y-auto"}>
+            <div className={" flex flex-row flex-wrap h-full w-full items-start content-start "}>
+                <div className={'h-[200px] w-full pt-4 grid grid-cols-4 grid-rows-2 text-white mx-3 gap-4'}>
+                    <div className={'flex justify-center items-center w-full flex-row justify-start '}>
+                        <div className={`h-full w-full flex justify-top bg-white/8 shadow-xl border border-transparent border-white/20 rounded-[4]`}>
+                            <img
+                                src={`http://localhost:3000/static/playlist/liked-songs-64.png`}
+                                draggable={false}
+                                className="rounded-[4px] h-full  aspect-square"
+                            />
+                        </div>
+                    </div><div className={'flex justify-center items-center w-full flex-row justify-start '}>
+                        <div className={`h-full w-full flex justify-top bg-white/8 shadow-xl border border-transparent border-white/20 rounded-[4]`}>
+                            <img
+                                src={`http://localhost:3000/static/playlist/liked-songs-64.png`}
+                                draggable={false}
+                                className="rounded-[4px] h-full  aspect-square"
+                            />
+                        </div>
+                    </div><div className={'flex justify-center items-center w-full flex-row justify-start '}>
+                        <div className={`h-full w-full flex justify-top bg-white/8 shadow-xl border border-transparent border-white/20 rounded-[4]`}>
+                            <img
+                                src={`http://localhost:3000/static/playlist/liked-songs-64.png`}
+                                draggable={false}
+                                className="rounded-[4px] h-full  aspect-square"
+                            />
+                        </div>
+                    </div><div className={'flex justify-center items-center w-full flex-row justify-start '}>
+                        <div className={`h-full w-full flex justify-top bg-white/8 shadow-xl border border-transparent border-white/20 rounded-[4]`}>
+                            <img
+                                src={`http://localhost:3000/static/playlist/liked-songs-64.png`}
+                                draggable={false}
+                                className="rounded-[4px] h-full  aspect-square"
+                            />
+                        </div>
+                    </div><div className={'flex justify-center items-center w-full flex-row justify-start '}>
+                        <div className={`h-full w-full flex justify-top bg-white/8 shadow-xl border border-transparent border-white/20 rounded-[4]`}>
+                            <img
+                                src={`http://localhost:3000/static/playlist/liked-songs-64.png`}
+                                draggable={false}
+                                className="rounded-[4px] h-full  aspect-square"
+                            />
+                        </div>
+                    </div><div className={'flex justify-center items-center w-full flex-row justify-start '}>
+                        <div className={`h-full w-full flex justify-top bg-white/8 shadow-xl border border-transparent border-white/20 rounded-[4]`}>
+                            <img
+                                src={`http://localhost:3000/static/playlist/liked-songs-64.png`}
+                                draggable={false}
+                                className="rounded-[4px] h-full  aspect-square"
+                            />
+                        </div>
+                    </div><div className={'flex justify-center items-center w-full flex-row justify-start '}>
+                        <div className={`h-full w-full flex justify-top bg-white/8 shadow-xl border border-transparent border-white/20 rounded-[4]`}>
+                            <img
+                                src={`http://localhost:3000/static/playlist/liked-songs-64.png`}
+                                draggable={false}
+                                className="rounded-[4px] h-full  aspect-square"
+                            />
+                        </div>
+                    </div><div className={'flex justify-center items-center w-full flex-row justify-start '}>
+                        <div className={`h-full w-full flex justify-top bg-white/8 shadow-xl border border-transparent border-white/20 rounded-[4]`}>
+                            <img
+                                src={`http://localhost:3000/static/playlist/liked-songs-64.png`}
+                                draggable={false}
+                                className="rounded-[4px] h-full  aspect-square"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <TracksPanel/>
             </div>
         </div>
     )

@@ -1,0 +1,37 @@
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    height: 40px;
+    border-radius: 8px;
+    background: #1F1F1F;
+    cursor: text;
+    transition: all 0.2s ease;
+    padding-inline: 12px;
+}
+
+.input-wrapper:hover {
+    background: #2A2A2A;
+    border: 1px solid #676767;
+}
+
+.input-wrapper:focus-within {
+    border: 2px solid white !important;
+    background: #2A2A2A;
+}
+
+
+
+/* Input */
+.input-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+}
+
+.input-input::placeholder {
+    color: #B3B3B3;
+}

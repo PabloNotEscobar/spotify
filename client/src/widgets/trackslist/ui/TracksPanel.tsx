@@ -8,10 +8,13 @@ export async function TracksPanel () {
 
 
     return (
-        <div className={"overflow-y-auto flex flex-row flex-wrap h-full w-full items-start content-start "}>
-            {tracks.map(track =>
-                <TrackCardHome track={track} key={track.id}/>
-            )}
+        <div className={"w-full h-full mt-15"}>
+            <div className={"flex flex-row flex-wrap h-full w-full items-start content-start "}>
+                {tracks.map(track =>
+                    <TrackCardHome track={track} key={track.id}/>
+                )}
+            </div>
         </div>
+
     )
 }

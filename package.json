@@ -33,6 +33,7 @@
   "author": "Ты",
   "license": "MIT",
   "dependencies": {
+    "@nestjs/mapped-types": "*",
     "@types/express": "^5.0.5"
   }
 }

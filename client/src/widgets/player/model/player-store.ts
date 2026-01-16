@@ -40,7 +40,7 @@ export const usePlayerStore = create<PlayerStore>()(
         }),
         {
             name: 'Player Store', // Имя в DevTools
-            // store: 'player',    // опционально
+            store: 'player',    // опционально
         }
     )
 );

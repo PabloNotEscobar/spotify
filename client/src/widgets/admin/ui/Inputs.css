@@ -1,4 +1,4 @@
-.search-wrapper {
+.input-wrapper {
     display: flex;
     align-items: center;
     width: 90%;
@@ -10,12 +10,12 @@
     padding-inline: 12px;
 }
 
-.search-wrapper:hover {
+.input-wrapper:hover {
     background: #2A2A2A;
     border: 1px solid #676767;
 }
 
-.search-wrapper:focus-within {
+.input-wrapper:focus-within {
     border: 2px solid white !important;
     background: #2A2A2A;
 }
@@ -23,7 +23,7 @@
 
 
 /* Input */
-.search-input {
+.input-input {
     flex: 1;
     background: transparent;
     border: none;
@@ -32,6 +32,6 @@
     font-size: 14px;
 }
 
-.search-input::placeholder {
+.input-input::placeholder {
     color: #B3B3B3;
 }

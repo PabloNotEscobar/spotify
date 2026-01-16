@@ -10,6 +10,7 @@ export interface ITrack {
     listens: number;
     image: string;
     audio: string;
+    primaryColor: string
     album?: IAlbum
     albumId?: number | null;
 }

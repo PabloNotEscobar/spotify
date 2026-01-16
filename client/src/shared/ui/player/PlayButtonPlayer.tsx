@@ -1,13 +1,28 @@
 'use client'
 import {IPlayButtonPlayer} from "@/shared/types"
 import React from "react";
-import {usePlayerStore} from "@/widgets/player/model/player-store";
 
 
-export function PlayButtonPlayer({ className , play, playClickHandler}: IPlayButtonPlayer) {
+export function PlayButtonPlayer({ className , play, playClickHandler, circleDiameter = '32', iconSize = '20', color = 'white'}: IPlayButtonPlayer) {
     return (
-        <div className={`cursor-pointer bg-white w-8 h-8 shadow-xl/50 rounded-full flex justify-center items-center ${className}`} onClick={playClickHandler}>
-            <svg viewBox="0 0 24 24" className="w-5 h-5 flex content-center items-center justify-center">
+        <div
+            style={{
+                width: `${circleDiameter}px`,
+                height: `${circleDiameter}px`,
+                backgroundColor: color,
+            }}
+            className={`cursor-pointer shadow-xl/50 rounded-full flex justify-center items-center ${className}`}
+            onClick={playClickHandler}
+        >
+            <svg
+                viewBox="0 0 24 24"
+                style={{
+                    width: `${iconSize}px`,
+                    height: `${iconSize}px`,
+                }}
+                className={`flex content-center items-center justify-center`}
+
+            >
                 {
                     play
                         ?
@@ -15,7 +30,6 @@ export function PlayButtonPlayer({ className , play, playClickHandler}: IPlayBut
                         :
                         <path className="fill-black" d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606"></path>
                 }
-
             </svg>
 
             {/*<svg viewBox="0 0 24 24" className="w-6 h-6 hidden group-hover:block">*/}

@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./static:/usr/share/nginx/html/static:ro # Твоя музыка/картинки
+    depends_on:
+      - frontend
+      - backend
+  db:
+    image: postgres:bookworm
+    command: [ "postgres", "-c", "wal_level=logical" ] # Это критично!
+    ports: [ "5432:5432" ] # В деве открываем, чтобы зайти через DBeaver/Adminer
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    environment:
+      - MEILI_ENV=development
+
+  backend:
+    build:
+      context: ./server
+      target: development
+    command: npm run dev
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    ports: ["4000:4000"]
+    depends_on: [db, meilisearch]
+
+  frontend:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm install && npx next dev"
+    environment:
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./client:/app
+      - ./static:/app/static # Связываем папку на компе с папкой в Nginx
+      - /app/node_modules
+    ports: ["3000:3000"]
+
+volumes:
+  redis_data:
+  postgres_data:
