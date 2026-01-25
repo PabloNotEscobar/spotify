@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const initAuth = async () => {
             try {
                 const data = await AuthApi.refresh();
-                console.log(data.user)
                 setUser(data.user)
 
                 if (data.user.role !== 'admin') {

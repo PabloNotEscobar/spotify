@@ -1,5 +1,10 @@
 'use client'
-import {usePlayerStore} from "@/widgets/player/model/player-store";
+import { usePlayerStore } from "@/widgets/player/model/player-store";
+import { throttle } from 'es-toolkit';
+
+const throttledAction = throttle((action: () => void) => {
+    action();
+}, 400);
 
 export const useTogglePlayerPlayback = () => {
     const play = usePlayerStore(state => state.play);
@@ -7,12 +12,14 @@ export const useTogglePlayerPlayback = () => {
     const setPause = usePlayerStore(state => state.setPause);
 
     const playHandler = () => {
-        if (!play) {
-            setPlay();
-        } else {
-            setPause();
-        }
+        throttledAction(() => {
+            if (!play) {
+                setPlay();
+            } else {
+                setPause();
+            }
+        });
     };
 
-    return {play, playHandler}
+    return { play, playHandler };
 }

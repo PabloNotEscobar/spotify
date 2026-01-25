@@ -16,9 +16,9 @@ export const useToggleCardPlayback = (track: ITrack) => {
         } else if (track.id === active?.id && !play) {
             setPlay()
         } else {
+            console.log('1')
             setPause()
             setActive(track)
-
         }
     }
 

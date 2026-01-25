@@ -13,8 +13,7 @@ export function LikeTrackButton ({trackId}: LikeTrackButton) {
     const excludeFromFavorite = useUserStore(state => state.excludeFromFavoriteTracks)
     const favorite = useUserStore(state => state.favoriteTracks)
     const isFavorite = favorite.includes(trackId)
-    console.log(favorite)
-    console.log(isFavorite)
+
 
     const onClick = async () => {
         try {
