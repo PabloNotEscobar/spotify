@@ -1,6 +1,7 @@
 'use client'
 import {usePlayerStore} from "@/widgets/player/model/player-store";
 import {ITrack} from "@/entities/track";
+import {useAudioInstance} from "@/shared/providers/audio-provider";
 
 export const useToggleCardPlayback = (track: ITrack) => {
     const active = usePlayerStore(state => state.active)
@@ -8,6 +9,7 @@ export const useToggleCardPlayback = (track: ITrack) => {
     const setPause = usePlayerStore(state => state.setPause)
     const play = usePlayerStore(state => state.play)
     const setActive = usePlayerStore(state => state.setActive)
+
 
 
     const playHandler = () => {

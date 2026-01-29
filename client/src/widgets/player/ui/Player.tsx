@@ -6,42 +6,28 @@ import React, {useEffect} from "react";
 import {usePlayerStore} from "@/widgets/player/model/player-store";
 import { Howl } from 'howler'; // Добавьте эту строку
 import { throttle } from 'es-toolkit';
+import {useAudioInstance} from "@/shared/providers/audio-provider";
 
 
-let audio: Howl | null = null;
 
 export function Player () {
 
-    const setDuration = usePlayerStore(state => state.setDuration)
-    const active = usePlayerStore(state => state.active)
-    const play = usePlayerStore(state => state.play)
-    const setPlay = usePlayerStore(state => state.setPlay)
-    const setPause = usePlayerStore(state => state.setPause)
-    const volume = usePlayerStore(state => state.volume)
-    const setVolume = usePlayerStore(state => state.setVolume)
-    const setCurrentTime = usePlayerStore(state => state.setCurrentTime)
+    const {
+        active, play, volume,
+        setDuration, setPlay, setVolume
+    } = usePlayerStore();
 
-    // useEffect(() => {
-    //     if (!audio) {
-    //         audio = new Howl({
-    //             src: [`http://localhost:4000${active?.audio}`],
-    //             html5: true,
-    //         });
-    //         audio.volume(volume / 100)
-    //     }
-    // }, [])
+    const audioRef = useAudioInstance()
 
     useEffect(() => {
-        if (audio) {
+        if (audioRef.current) {
+            const audio = audioRef.current
             if (play) {
                 console.log(6)
-                if (!audio.playing()) {
-                    audio.play();
-                }
-                audio.volume(0);
+                audio.play()
                 setTimeout(() => {
                     if (audio && play) audio.fade(0, volume / 100, 150);
-                }, 50);
+                }, 150);
                 console.log('7')
             } else {
                 console.log('2')
@@ -53,51 +39,59 @@ export function Player () {
                 console.log('3')
             }
         }
-    }, [play])
+    }, [audioRef, play])
 
     useEffect(() => {
-        if (active?.audio) {
-            console.log('4')
-            if (audio)
-            audio.unload()
-            audio = new Howl({
-                src: [`http://localhost:4000${active?.audio}`],
+        const loadNewTrack = () => {
+            audioRef.current = new Howl({
+                src: [`${active?.audio}`],
                 html5: false,
                 volume: 0,
                 onload: function() {
-                    if (audio) {
-                        setDuration(audio.duration());
+                    if (audioRef.current) {
+                        setDuration(audioRef.current.duration());
+                        setPlay()
                     }
                 }
             });
-            console.log('5')
-            setPlay()
         }
-    }, [active?.audio])
 
-
-
+        if (audioRef.current) {
+            console.log('4')
+            if (audioRef.current)
+            setTimeout(() => {
+                console.log('пауза дождался')
+                if (audioRef.current) audioRef.current.unload()
+                loadNewTrack()
+            }, 150)
+            console.log('5')
+        } else {
+            if (active?.audio) {
+                loadNewTrack()
+            }
+        }
+    }, [active?.audio, setDuration, setPlay])
 
 
     const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
         const percent = Number(e.target.value);
-        if (audio)
-        audio.seek((percent / 100) * audio.duration())
+        if (audioRef.current)
+            audioRef.current.seek((percent / 100) * audioRef.current.duration())
     }
 
     const changeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (audio)
-        audio.volume(Number(e.target.value) / 100)
+        if (audioRef.current)
+            audioRef.current.volume(Number(e.target.value) / 100)
         setVolume(Number(e.target.value))
     }
 
     const toggleMute = () => {
-        if (audio) {
+        if (audioRef.current) {
             if (volume > 0) {
-                audio.volume(0)
+                audioRef.current.volume(0)
                 setVolume(0);
             } else {
-                audio.volume(0.80)
+                audioRef.current.volume(0.80)
                 setVolume(80);
             }
         }

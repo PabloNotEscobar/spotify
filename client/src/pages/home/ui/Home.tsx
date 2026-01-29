@@ -8,7 +8,7 @@ export function HomePage() {
                     <div className={'flex justify-center items-center w-full flex-row justify-start '}>
                         <div className={`h-full w-full flex justify-top bg-white/8 shadow-xl border border-transparent border-white/20 rounded-[4px]`}>
                             <img
-                                src={`http://nginx/static/playlist/liked-songs-64.png`}
+                                src={`/static/playlist/liked-songs-300.jpg`}
                                 draggable={false}
                                 className="rounded-[4px] h-full aspect-square"
                             />

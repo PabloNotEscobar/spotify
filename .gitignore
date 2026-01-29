@@ -1,8 +1,10 @@
 # Node
-node_modules/
+node_modules
 client/node_modules/
 server/node_modules/
 Makefile
+server/dist
+client/.next
 
 # Builds
 client/.next/

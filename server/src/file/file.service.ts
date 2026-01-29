@@ -14,11 +14,14 @@ export enum FileType {
 
 @Injectable()
 export class FileService {
+
+  private readonly staticRoot = path.resolve(process.cwd(), 'static');
+
   createFile (type: FileType, file): string {
     try {
       const fileExtension = file.originalname.split('.').pop()
       const fileName = uuid.v4() + '.' + fileExtension
-      const filePath = path.resolve(__dirname, '..', '..', '..', '..', 'static', type)
+      const filePath = path.resolve(this.staticRoot, type);
       if (!fs.existsSync(filePath)) {
         fs.mkdirSync(filePath, {recursive: true})
       }

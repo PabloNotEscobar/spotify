@@ -30,7 +30,8 @@ export function FavoriteTracksPanel () {
 
     return (
         <div className={'w-full h-full flex flex-col overflow-y-auto'}>
-            <div className={'w-full h-69 flex flex-row items-end border-b-1 border-b-black'}>
+            {
+                <div className={'w-full h-69 flex flex-row items-end border-b-1 border-b-black'}>
                 <div className={'h-full aspect-square p-6 flex justify-center items-center rounded-[4px]'}>
                     <img
                         src={`http://localhost:3000/static/playlist/liked-songs-300.jpg`}
@@ -44,6 +45,7 @@ export function FavoriteTracksPanel () {
                     <div className={'w-full h-15'}></div>
                 </div>
             </div>
+            }
 
             <div className={'m-6 flex flex-col box-border h-full'}>
                 <div className={'h-26'}>

@@ -5,7 +5,7 @@ import {IFavoriteTrack} from "@/entities/favorite-track/types";
 
 export class GetFavoriteTracksApi {
     static async getAll (): Promise<IFavoriteTrack[]> {
-        const { data } = await $api.get<IFavoriteTrack[]>(trackRoutes.getFavoriteTracks);
+        const { data } = await $api.get<IFavoriteTrack[]>('/favorite-tracks');
         return data
     }
 }

@@ -10,8 +10,7 @@ interface TrackCardHomeProps {
 
 export function TrackCardHome ({track}: TrackCardHomeProps) {
 
-    const imageUrl = `http://nginx${track.image}`
-    console.log(imageUrl)
+    const imageUrl = `${track.image}`
     console.log(imageUrl)
 
     return (

@@ -6,5 +6,7 @@ export class SignInResponseDto {
   user: {
     id: number
     email: string
+    role: string
+    favoriteTracks: number[]
   }
 }

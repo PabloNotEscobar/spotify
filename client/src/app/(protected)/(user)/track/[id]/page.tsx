@@ -17,7 +17,7 @@ export default async function Page({ params }: PageProps) {
         <div className={"text-white"}>
             <div className={`relative w-full flex justify-center aspect-square`}>
                 <img
-                    src={`http://localhost:3000${track.image}`}
+                    src={`${track.image}`}
                     alt={String(id)}
                     // fill
                     className="object-cover rounded-[6px] select-none"

@@ -8,7 +8,7 @@ export const authRoutes = {
 
 export const trackRoutes = {
     createTrack: "http://localhost:4000/tracks/create",
-    likeTrack: "http://localhost:3000/favorite-tracks/add",
-    dislikeTrack: "http://localhost:3000/favorite-tracks/delete",
-    getFavoriteTracks: "http://localhost:3000/favorite-tracks",
+    likeTrack: "http://localhost:4000/favorite-tracks/add",
+    dislikeTrack: "http://localhost:4000/favorite-tracks/delete",
+    getFavoriteTracks: "http://localhost:4000/favorite-tracks",
 }

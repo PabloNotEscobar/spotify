@@ -1,0 +1,26 @@
+# Зависимости
+node_modules
+
+# Результаты сборки
+dist
+build
+
+/node_modules/@prisma/client
+/.prisma
+
+# Логи и временные файлы
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Git и IDE
+.git
+.gitignore
+.vscode
+.idea
+.dockerignore
+Dockerfile*
+
+.env
+.env.production

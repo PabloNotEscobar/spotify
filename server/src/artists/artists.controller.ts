@@ -9,7 +9,7 @@ import { CreateTrackDto } from '../track/dto/create-track.dto';
 export class ArtistsController {
   constructor(private readonly artistsService: ArtistsService) {}
 
-  @Post()
+  @Post('create')
   @UseInterceptors(FileFieldsInterceptor([
     { name: 'image', maxCount: 1 }
   ]))

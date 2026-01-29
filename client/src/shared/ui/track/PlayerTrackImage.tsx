@@ -2,12 +2,12 @@ import {ImageProps} from "@/shared/types";
 
 
 
-export function PlayerTrackImage ({ id, imageUrl}: ImageProps ) {
+export function PlayerTrackImage ({ id, imageUrl }: ImageProps ) {
 
     return (
         <div className={`h-full flex justify-center aspect-square`}>
             <img
-                src={`http://localhost:3000${imageUrl}`}
+                src={`${imageUrl}`}
                 alt={String(id)}
                 key={id}
                 draggable={false}

@@ -10,13 +10,13 @@ async function bootstrap() {
   app.use(cookieParser())
 
   app.enableCors({
-    origin: 'http://localhost:5000', // Укажи точный адрес фронтенда
+    origin: ['http://localhost:3000', 'http://frontend:3000'],
     credentials: true,                // Обязательно разрешаем передачу кук/заголовков
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   });
 
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(4000, '0.0.0.0');
 }
 bootstrap();

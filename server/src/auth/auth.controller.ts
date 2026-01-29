@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller,
+  Controller, Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -16,6 +16,7 @@ import { SignUpDto } from './dto/sign-up.dto';
 import { SignInResponseDto } from './dto/sign-in-response.dto';
 import { RefreshToken } from '@prisma/client';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
+import { RefreshTokenResponseDto } from './dto/refresh-token-response.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -53,13 +54,9 @@ export class AuthController {
     return req.user;
   }
 
-  @Post('refresh-token')
-  async refreshToken(@Body() dto: RefreshTokenDto, @Req() req: Request, @Res({passthrough: true}) res: Response ): Promise<SignInResponseDto> {
-
-    console.log(req.cookies)
-
+  @Get('refresh-token')
+  async refreshToken(@Req() req: Request, @Res({passthrough: true}) res: Response ): Promise<RefreshTokenResponseDto> {
     const refreshToken = req.cookies['refreshToken'];
-    console.log(refreshToken)
 
     const tokens = await this.authService.refreshToken(refreshToken)
 
@@ -74,5 +71,19 @@ export class AuthController {
       accessToken: tokens.accessToken,
       user: tokens.user
     };
+  }
+
+  @Delete('logout')
+  async logout(@Req() req: Request, @Res({passthrough: true}) res: Response ) {
+    const refreshToken = req.cookies['refreshToken'];
+
+    await this.authService.logout(refreshToken)
+
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax',
+      path: '/',
+    });
   }
 }

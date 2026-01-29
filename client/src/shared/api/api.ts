@@ -9,7 +9,7 @@ export const getTracks = async (): Promise<ITrack[]> => {
 };
 
 export const getOneTrack = async (id: string): Promise<ITrack> => {
-    const response = await fetch(authRoutes.getOneTrack + `/${id}`, {
+    const response = await fetch('http://backend:4000/tracks' + `/${id}`, {
         cache: 'no-store'
     });
     return response.json();

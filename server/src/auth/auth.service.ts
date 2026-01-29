@@ -1,13 +1,24 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignInResponseDto } from './dto/sign-in-response.dto';
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcrypt';
 import { SignUpDto } from './dto/sign-up.dto';
-import { User } from '@prisma/client';
-import {randomBytes} from 'node:crypto'
+import { randomBytes } from 'node:crypto';
 import { PrismaService } from '../prisma.service';
+import { Prisma, User } from '@prisma/client';
+import { GetTokensDto } from './dto/get-tokens.dto';
+import { RefreshTokenResponseDto } from './dto/refresh-token-response.dto';
+
+type UserWithFavorites = Prisma.UserGetPayload<{
+  include: { favoriteTracks: true }
+}>;
+
 
 @Injectable()
 export class AuthService {
@@ -19,19 +30,26 @@ export class AuthService {
 
   async signIn(dto: SignInDto): Promise<SignInResponseDto> {
     const user = await this.usersService.findOneByEmail(dto.email);
-    console.log(dto.email)
-    console.log(user)
     if (!user) {
       throw new UnauthorizedException();
     }
 
     const isPasswordValid = await bcrypt.compare(dto.password, user.password);
-    console.log(isPasswordValid)
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid password');
     }
 
-    return this.getTokens(user);
+    const tokens = await this.getTokens(user);
+
+    return {
+      ...tokens,
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        favoriteTracks: user.favoriteTracks.map((t) => t.trackId),
+      },
+    };
   }
 
   async signUp(dto: SignUpDto): Promise<void> {
@@ -51,16 +69,15 @@ export class AuthService {
       name: dto.name,
       email: dto.email,
       password: hashPassword,
-      role: dto.role,
+      role: 'user',
     });
-
   }
 
   private generateSecureToken(): string {
     return randomBytes(48).toString('base64url');
   }
 
-  async getTokens(user: User): Promise<SignInResponseDto> {
+  async getTokens(user: User): Promise<GetTokensDto> {
     const payload = {
       id: user.id,
       name: user.name,
@@ -75,26 +92,19 @@ export class AuthService {
       data: {
         token: this.generateSecureToken(),
         expires: expires,
-        userId: user.id
+        userId: user.id,
       },
     });
-    console.log('здесь скип')
     return {
       accessToken: await this.jwtService.signAsync(payload),
       refreshToken: refreshToken.token,
-      user: {
-        id: user.id,
-        email: user.email
-      }
     };
   }
 
-  async refreshToken(token: string): Promise<SignInResponseDto> {
-    console.log('до проверки токена')
+  async refreshToken(token: string): Promise<RefreshTokenResponseDto> {
     if (!token) {
       throw new UnauthorizedException('Refresh token missing');
     }
-    console.log('после токена')
     const now = new Date();
     const refreshToken = await this.prisma.refreshToken.findFirst({
       where: {
@@ -104,22 +114,46 @@ export class AuthService {
         },
       },
       include: {
-        user: true,
+        user: {
+          include: {
+            favoriteTracks: true
+          }
+        }
       },
     });
 
     if (!refreshToken) {
       throw new UnauthorizedException('Invalid refresh token');
     }
-    console.log('привет')
-    await this.prisma.refreshToken.delete(
-      {
-        where: {
-          token
-        }
-      }
-    )
-    console.log('я тут')
-    return this.getTokens(refreshToken.user);
+    await this.prisma.refreshToken.delete({
+      where: {
+        token,
+      },
+    });
+
+    const tokens = await this.getTokens(refreshToken.user);
+
+    const { password, ...userWithoutPassword } = refreshToken.user;
+
+    return {
+      ...tokens,
+      user: {
+        id: refreshToken.user.id,
+        email: refreshToken.user.email,
+        role: refreshToken.user.role,
+        favoriteTracks: refreshToken.user.favoriteTracks.map((t) => t.trackId)
+      },
+    };
+  }
+
+  async logout(token: string) {
+    if (!token) {
+      throw new UnauthorizedException('User is already unauthorized');
+    }
+    await this.prisma.refreshToken.deleteMany({
+      where: {
+        token,
+      },
+    });
   }
 }

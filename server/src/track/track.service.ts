@@ -2,27 +2,34 @@ import { Injectable } from '@nestjs/common';
 import { UpdateTrackDto } from './dto/update-track.dto';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { PrismaService } from '../prisma.service';
-import { Track } from '@prisma/client';
 import { FileService, FileType } from '../file/file.service';
+import { ColorThemeService } from '../color-theme/color-theme.service';
+import { Track } from '@prisma/client';
 
 @Injectable()
 export class TrackService {
   constructor(
     private prisma: PrismaService,
     private fileService: FileService,
+    private colorService: ColorThemeService
   ) {}
 
   async create(dto: CreateTrackDto, image, audio): Promise<Track> {
 
     const audioPath = this.fileService.createFile(FileType.AUDIO, audio);
     const imagePath = this.fileService.createFile(FileType.TRACKIMAGE, image);
+    console.log(imagePath)
+    const color= await this.colorService.getDominantColor(imagePath)
+
 
     return this.prisma.track.create({
       data: {
         ...dto,
+        primaryColor: color,
         artistId: Number(dto.artistId),
         image: imagePath,
         audio: audioPath,
+
       }
     });
   }

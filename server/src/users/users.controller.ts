@@ -15,7 +15,7 @@ export class UsersController {
 
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(UserRoles.admin)
-  @Post()
+  @Post('create')
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
@@ -33,9 +33,10 @@ export class UsersController {
     return this.usersService.getUserById(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+
+  @Delete(':id')
+  logout(@Param('id') id: string) {
+    return this.usersService.logout(+id);
   }
 
   @Delete(':id')

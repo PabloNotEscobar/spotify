@@ -6,7 +6,7 @@ export function LibraryElement () {
             <div className={'w-18 h-18 flex justify-center items-center cursor-pointer rounded-[4px] hover:bg-[#1F1F1F]'}>
                 <div className={`w-12 h-12 flex justify-center items-center `}>
                     <img
-                        src={`http://nginx/static/playlist/liked-songs-64.png`}
+                        src={`/static/playlist/liked-songs-300.jpg`}
                         draggable={false}
                         className="rounded-[4px] w-full h-full"
                     />

@@ -4,7 +4,7 @@ import {trackRoutes} from "@/shared/api/routes";
 export class LikeTrackApi {
     static async like(trackId: number) {
         await $api.post(
-            trackRoutes.likeTrack,
+            '/favorite-tracks/add',
             {trackId}
         )
         return
@@ -12,7 +12,7 @@ export class LikeTrackApi {
 
     static async dislike(trackId: number) {
         await $api.delete(
-            trackRoutes.dislikeTrack + `/${trackId}`
+            '/favorite-tracks/delete' + `/${trackId}`
         )
         return
     }
