@@ -4,7 +4,7 @@ import {RoleWarn} from "@/widgets/role-warn/RoleWarn";
 
 export function HomePage() {
     return (
-        <div className={"w-full h-full px-7 overflow-y-auto"}>
+        <div className={"w-full h-full overflow-y-auto"} >
             <div className={" flex flex-row flex-wrap h-full w-full items-start content-start "}>
                 {/*<div className={'h-[100px] w-full pt-4 grid grid-cols-4 grid-rows-2 text-white mx-3 gap-4'}>*/}
                 {/*    <div className={'flex justify-center items-center w-full flex-row justify-start '}>*/}

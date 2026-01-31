@@ -35,9 +35,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     if (loaded)
-        return <>
-            {children}
-        </>;
+        return children
+
 
     return <div>Загрузка...</div>;
 };

@@ -15,15 +15,17 @@ export function SearchInput ({throttleSearch}: SearchProps) {
     const router = useRouter()
 
     const onChange: KeyboardEventHandler<HTMLInputElement>  = (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && search !== '') {
             throttleSearch(search)
             router.replace('/search');
         }
     }
 
     const onClick = () => {
-        throttleSearch(search)
-        router.replace('/search')
+        if (search !== '') {
+            throttleSearch(search)
+            router.replace('/search')
+        }
     }
 
     return (

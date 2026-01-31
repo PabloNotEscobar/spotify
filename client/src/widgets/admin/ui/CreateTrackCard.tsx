@@ -53,7 +53,7 @@ export function CreateTrackCard () {
                         onChange={(e) => {setArtist(e.target.value)}}
                     />
                 </div>
-                <label className={"input-wrapper cursor-pointer gap-x-3"} htmlFor="file-upload">
+                <label className={"input-wrapper cursor-pointer gap-x-3"} htmlFor="image-upload">
                     <AddImage />
                     <h4 className={'text-[#B3B3B3] text-[14px] overflow-x-hidden'}>
                         Добавить изображение
@@ -63,13 +63,14 @@ export function CreateTrackCard () {
                         accept={'image/*'}
                         className={"cursor-pointer hidden"}
                         placeholder={"Выберите изображение"}
+                        id="image-upload"
                         onChange={(e) => {
                             if (e.target.files)
                                 setImage(e.target.files[0])
                         }}
                     />
                 </label>
-                <label className={"input-wrapper cursor-pointer gap-x-3"} htmlFor="file-upload">
+                <label className={"input-wrapper cursor-pointer gap-x-3"} htmlFor="audio-upload">
                     <AddMusicFile />
                     <h4 className={'text-[14px] text-[#B3B3B3] overflow-x-hidden'}>
                         Выберите аудио
@@ -78,7 +79,7 @@ export function CreateTrackCard () {
                         type="file"
                         accept={'audio/*'}
                         className={'cursor-pointer hidden'}
-                        id="file-upload"
+                        id="audio-upload"
                         onChange={(e) => {
                             if (e.target.files)
                                 setAudio(e.target.files[0])

@@ -8,14 +8,9 @@ interface DynamicBackground {
 
 export function DynamicBackground ({children}: DynamicBackground) {
 
-    const color = usePlayerStore(state => state.active?.primaryColor)
-
     return (
         <div
-            style={{
-                background: `linear-gradient(to bottom, ${color || '#121212'} 0%, #121212 30%)`
-            }}
-            className={"overflow-y-auto flex-1 w-full h-full rounded-[8px] bg-[#121212]"}
+            className="flex-1 w-full h-full rounded-[8px] bg-[#121212] overflow-y-auto"
         >
             {children}
         </div>

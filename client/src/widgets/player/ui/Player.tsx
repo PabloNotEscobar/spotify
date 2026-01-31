@@ -12,6 +12,8 @@ import {useAudioInstance} from "@/shared/providers/audio-provider";
 
 export function Player () {
 
+    const color = usePlayerStore(state => state.active?.primaryColor)
+
     const {
         active, play, volume,
         setDuration, setPlay, setVolume
@@ -110,7 +112,9 @@ export function Player () {
                     <PlayerSettingsRight changeVolume={changeVolume} volume={volume} toggleMute={toggleMute}/>
                 </div>
             </div>
-            <div className={"flex w-full h-4 rounded-[4] bg-green-500"}></div>
+            <div className={"flex w-full h-4 rounded-[4px] "} style={{
+                background: color || '#4ade80'
+            }}></div>
         </div>
     )
 }
