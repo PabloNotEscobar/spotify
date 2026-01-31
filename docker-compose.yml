@@ -17,7 +17,7 @@ services:
     image: bfontaine/postgres-wal2json:15-bookworm
     container_name: db
     command: postgres -c wal_level=logical
-    ports: [ "5433:5432" ]
+    ports: [ "5432:5432" ]
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
@@ -29,11 +29,11 @@ services:
 #    image: redis:7-alpine
 #    container_name: meilibridge-redis
 #    ports:
-#      - "6380:6379"
+#      - "6379:6379"
 #    volumes:
 #      - redis_data:/data
 #    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
-
+#
 #  meilisearch:
 #    image: getmeili/meilisearch:nightly
 #    container_name: meilisearch
@@ -46,13 +46,14 @@ services:
 #
 #  meilibridge:
 #    image: binarytouch/meilibridge:latest
+#    container_name: meilibridge
 #    restart: unless-stopped
-#    command: [ "--config", "/config.yaml" ]
+##    command: [ "--config", "/config.yaml" ]
 #    volumes:
 #      - ./config.yaml:/config.yaml
 #      - meilibridge-data:/data
 #    ports:
-#      - "7701:7701"
+#      - "7708:7708"
 #    depends_on:
 #      - db
 #      - meilisearch

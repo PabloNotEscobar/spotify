@@ -8,7 +8,7 @@ export async function TracksPanel () {
 
 
     return (
-        <div className={"w-full h-full mt-15"}>
+        <div className={"w-full h-full mt-7"}>
             <div className={"flex flex-row flex-wrap h-full w-full items-start content-start "}>
                 {tracks.map(track =>
                     <TrackCardHome track={track} key={track.id}/>

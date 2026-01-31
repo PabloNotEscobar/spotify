@@ -4,6 +4,7 @@ import "../../globals.css"
 import {LibraryBar} from "@/widgets/library";
 import {AuthProvider} from "@/features/auth/ui/AuthPrivider";
 import {AdminProvider} from "@/features/auth/ui/AdminProvider";
+import {AudioProvider} from "@/shared/providers/audio-provider";
 
 
 export const metadata: Metadata = {
@@ -22,13 +23,15 @@ export default function RootLayout({
     <html lang="en">
       <body>
       <AdminProvider>
-          <div className="flex flex-col items-center w-full h-full p-2">
-              <Navbar/>
-              <div className="flex overflow-hidden flex-row w-full h-full">
-                  {children}
+          <AudioProvider>
+              <div className="flex flex-col items-center w-full h-full p-2">
+                  <Navbar/>
+                  <div className="flex overflow-hidden flex-row w-full h-full">
+                      {children}
+                  </div>
+                  <Player />
               </div>
-              <Player />
-          </div>
+          </AudioProvider>
       </AdminProvider>
 
       </body>

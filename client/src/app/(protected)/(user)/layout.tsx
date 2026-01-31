@@ -5,22 +5,28 @@ import {LibraryBar} from "@/widgets/library";
 import {AuthProvider} from "@/features/auth/ui/AuthPrivider";
 import {DynamicBackground} from "@/shared/ui/dynamic-background";
 import {AudioProvider} from "@/shared/providers/audio-provider";
+import { Supermercado_One } from 'next/font/google'
 
+// Unica_One
+
+const unicaOne = Supermercado_One({
+    subsets: ['latin'],
+    variable: '--font-unica',
+    weight: "400"
+})
 
 export const metadata: Metadata = {
     title: "Spotify",
     description: "next js fsd tailwind",
 };
 
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+export default function RootLayout({children}: Readonly<{
     children: React.ReactNode;
 }>) {
 
 
     return (
-        <html lang="en">
+        <html lang="en" className={unicaOne.variable}>
         <body>
         <AuthProvider>
             <AudioProvider>

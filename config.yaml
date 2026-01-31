@@ -4,17 +4,14 @@ source:
   port: 5432
   database: spotify-fsd-next
   username: postgres
-  password: 128777
-  replication:
-    slot_name: meilibridge_slot
-    publication_name: meilibridge_pub
+  password: pass1234
 
 meilisearch:
   url: http://meilisearch:7700
   api_key: qyZz2qbX9Nleu20jKJa2Oe-GFJl-Tb-twF1rTn1mkz0
 
 redis:
-  url: redis://redis:6379  # исправил с meilibridge-redis на redis
+  url: redis://meilibridge-redis:6379
 
 sync_tasks:
   - table: '"Track"'

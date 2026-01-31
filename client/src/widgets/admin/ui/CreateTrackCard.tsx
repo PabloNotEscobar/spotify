@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {useRouter} from "next/navigation";
 import {TrackApi} from "@/features/track/create-track/model/track.api";
 import './Inputs.css'
+import {AddImage, AddMusicFile} from "@/shared/ui/assets";
 
 export function CreateTrackCard () {
 
@@ -32,11 +33,11 @@ export function CreateTrackCard () {
 
     return (
         <div className={'w-full h-full p-2 flex justify-center items-center'}>
-            <div className={'w-1/3 h-6/11 bg-[#121212] rounded-[8] flex flex-col justify-center items-center gap-y-5'}>
-                <div className={'text-white'}>
+            <div className={'w-1/3 h-6/11 bg-[#121212] rounded-[8px] flex flex-col justify-center items-center gap-y-5'}>
+                <div className={'text-white overflow-x-hidden'}>
                     Create Track
                 </div>
-                <div className={"input-wrapper"}>
+                <div className={"input-wrapper cursor-text overflow-x-hidden"}>
                     <input
                         className="input-input"
                         placeholder="Track Name"
@@ -44,7 +45,7 @@ export function CreateTrackCard () {
                         onChange={(e) => {setName(e.target.value)}}
                     />
                 </div>
-                <div className={"input-wrapper"}>
+                <div className={"input-wrapper cursor-text overflow-x-hidden"}>
                     <input
                         className="input-input"
                         placeholder="Artist Id"
@@ -52,43 +53,50 @@ export function CreateTrackCard () {
                         onChange={(e) => {setArtist(e.target.value)}}
                     />
                 </div>
-                <div className={"input-wrapper cursor-pointer"}>
-                    Выберите изображение
+                <label className={"input-wrapper cursor-pointer gap-x-3"} htmlFor="file-upload">
+                    <AddImage />
+                    <h4 className={'text-[#B3B3B3] text-[14px] overflow-x-hidden'}>
+                        Добавить изображение
+                    </h4>
                     <input
                         type="file"
                         accept={'image/*'}
-                        className={"cursor-pointer"}
+                        className={"cursor-pointer hidden"}
                         placeholder={"Выберите изображение"}
                         onChange={(e) => {
                             if (e.target.files)
                                 setImage(e.target.files[0])
                         }}
                     />
-                </div>
-                <div className={"input-wrapper cursor-pointer"}>
-                    Выберите аудио
+                </label>
+                <label className={"input-wrapper cursor-pointer gap-x-3"} htmlFor="file-upload">
+                    <AddMusicFile />
+                    <h4 className={'text-[14px] text-[#B3B3B3] overflow-x-hidden'}>
+                        Выберите аудио
+                    </h4>
                     <input
                         type="file"
                         accept={'audio/*'}
-                        className={'cursor-pointer'}
+                        className={'cursor-pointer hidden'}
+                        id="file-upload"
                         onChange={(e) => {
                             if (e.target.files)
                                 setAudio(e.target.files[0])
                         }}
                     />
-                </div>
-                <div className={'w-9/10 h-10 flex flex-row justify-between text-white underline content-center '}>
+                </label>
+                <div className={'w-9/10 h-10 flex flex-row justify-between text-white content-center'}>
                     <div className={"h-10 w-1/7 flex justify-center content-center"}>
                     </div>
                     <button
-                        className={'h-10 w-1/7 bg-green-800 rounded-[8] text-white cursor-pointer'}
+                        className={'h-10 w-1/7 bg-green-800 rounded-[8px] text-white cursor-pointer no-underline hover:underline overflow-x-hidden'}
                         onClick={(e) => {
                             e.preventDefault(); // На всякий случай
                             handleSend()
                         }
                         }
                     >
-                        Send
+                        Create
                     </button>
                 </div>
             </div>
