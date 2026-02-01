@@ -7,7 +7,7 @@ interface Navbar {
 
 export function Navbar () {
     return (
-        <div className={"flex flex-row justify-between w-full h-13 bg-black rounded-[8] mb-2"}>
+        <div className={"flex flex-row justify-between w-full h-13 bg-black rounded-[8px] mb-2"}>
             <div className="h-full w-16 flex justify-center items-center">
                 <SpotifyIcon />
             </div>

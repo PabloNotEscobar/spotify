@@ -4,98 +4,70 @@ import {NowPlaying} from "@/widgets/player/ui/NowPlaying";
 import PlayerSettingsRight from "@/widgets/player/ui/PlayerSettingsRight";
 import React, {useEffect} from "react";
 import {usePlayerStore} from "@/widgets/player/model/player-store";
-import { Howl } from 'howler'; // Добавьте эту строку
-import { throttle } from 'es-toolkit';
-import {useAudioInstance} from "@/shared/providers/audio-provider";
 
-
+let audio: HTMLAudioElement;
 
 export function Player () {
 
-    const color = usePlayerStore(state => state.active?.primaryColor)
-
-    const {
-        active, play, volume,
-        setDuration, setPlay, setVolume
-    } = usePlayerStore();
-
-    const audioRef = useAudioInstance()
+    const setDuration = usePlayerStore(state => state.setDuration)
+    const active = usePlayerStore(state => state.active)
+    const play = usePlayerStore(state => state.play)
+    const setPlay = usePlayerStore(state => state.setPlay)
+    const volume = usePlayerStore(state => state.volume)
+    const setVolume = usePlayerStore(state => state.setVolume)
+    const setCurrentTime = usePlayerStore(state => state.setCurrentTime)
 
     useEffect(() => {
-        if (audioRef.current) {
-            const audio = audioRef.current
-            if (play) {
-                console.log(6)
-                audio.play()
-                setTimeout(() => {
-                    if (audio && play) audio.fade(0, volume / 100, 150);
-                }, 150);
-                console.log('7')
-            } else {
-                console.log('2')
-                audio.fade(audio.volume(), 0, 150);
-                audio.once('fade', () => {
-                    if (audio && !play)
-                        audio.pause();
-                });
-                console.log('3')
+        if (!audio) {
+            audio = new Audio()
+            audio.src = `${active?.audio}`
+            audio.volume = volume / 100
+            audio.onloadedmetadata = () => {
+                setDuration(audio.duration)
+            }
+            audio.ontimeupdate = () => {
+                setCurrentTime(audio.currentTime)
             }
         }
-    }, [audioRef, play])
+    }, [])
 
     useEffect(() => {
-        const loadNewTrack = () => {
-            audioRef.current = new Howl({
-                src: [`${active?.audio}`],
-                html5: false,
-                volume: 0,
-                onload: function() {
-                    if (audioRef.current) {
-                        setDuration(audioRef.current.duration());
-                        setPlay()
-                    }
-                }
-            });
+        if (active?.audio) {
+            audio.pause()
+            audio.src = `${active?.audio}`
+            setPlay()
         }
+    }, [active?.audio])
 
-        if (audioRef.current) {
-            console.log('4')
-            if (audioRef.current)
-            setTimeout(() => {
-                console.log('пауза дождался')
-                if (audioRef.current) audioRef.current.unload()
-                loadNewTrack()
-            }, 150)
-            console.log('5')
+    useEffect(() => {
+        if (play) {
+            console.log('play')
+            audio.play()
         } else {
-            if (active?.audio) {
-                loadNewTrack()
-            }
+            console.log('pause')
+            audio.pause()
         }
-    }, [active?.audio, setDuration, setPlay])
+    }, [play])
+
 
 
     const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
         const percent = Number(e.target.value);
-        if (audioRef.current)
-            audioRef.current.seek((percent / 100) * audioRef.current.duration())
+        audio.currentTime = (percent / 100) * audio.duration
     }
 
     const changeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (audioRef.current)
-            audioRef.current.volume(Number(e.target.value) / 100)
+        audio.volume = Number(e.target.value) / 100
         setVolume(Number(e.target.value))
     }
 
     const toggleMute = () => {
-        if (audioRef.current) {
-            if (volume > 0) {
-                audioRef.current.volume(0)
-                setVolume(0);
-            } else {
-                audioRef.current.volume(0.80)
-                setVolume(80);
-            }
+        if (volume > 0) {
+            audio.volume = 0
+            setVolume(0);
+        } else {
+            audio.volume = 0.80
+            setVolume(80);
         }
     };
 
@@ -112,9 +84,7 @@ export function Player () {
                     <PlayerSettingsRight changeVolume={changeVolume} volume={volume} toggleMute={toggleMute}/>
                 </div>
             </div>
-            <div className={"flex w-full h-4 rounded-[4px] "} style={{
-                background: color || '#4ade80'
-            }}></div>
+            <div className={"flex w-full h-4 rounded-[4] bg-green-500"}></div>
         </div>
     )
 }

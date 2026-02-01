@@ -5,12 +5,14 @@ import {TrackApi} from "@/features/track/create-track/model/track.api";
 import './Inputs.css'
 import {AddImage, AddMusicFile} from "@/shared/ui/assets";
 
+
 export function CreateTrackCard () {
 
     const [name, setName] = useState('')
     const [artist, setArtist] = useState('')
     const [image, setImage] = useState<File | null>(null)
     const [audio, setAudio] = useState<File | null>(null)
+    const [creating, setCreating] = useState<boolean>(false)
     const router = useRouter();
 
 
@@ -22,8 +24,10 @@ export function CreateTrackCard () {
                 formData.append('artistId', artist)
                 formData.append('image', image)
                 formData.append('audio', audio)
+                setCreating(true)
                 await TrackApi.create(formData);
-                // router.push('/');
+                setCreating(false)
+                alert('Трек добавлен!')
             }
         } catch (e) {
             console.error('Ошибка поймана:', e);
@@ -89,16 +93,22 @@ export function CreateTrackCard () {
                 <div className={'w-9/10 h-10 flex flex-row justify-between text-white content-center'}>
                     <div className={"h-10 w-1/7 flex justify-center content-center"}>
                     </div>
-                    <button
-                        className={'h-10 w-1/7 bg-green-800 rounded-[8px] text-white cursor-pointer no-underline hover:underline overflow-x-hidden'}
-                        onClick={(e) => {
-                            e.preventDefault(); // На всякий случай
-                            handleSend()
-                        }
-                        }
-                    >
-                        Create
-                    </button>
+                    {
+                        creating
+                            ?
+                            <div className="h-6 w-6 animate-spin rounded-full border-4 border-solid border-green-500 border-t-transparent"></div>
+                            :
+                            <button
+                                className={'h-10 w-1/7 bg-green-800 rounded-[8px] text-white cursor-pointer no-underline hover:underline overflow-x-hidden'}
+                                onClick={(e) => {
+                                    e.preventDefault(); // На всякий случай
+                                    handleSend()
+                                }
+                                }
+                            >
+                                Create
+                            </button>
+                    }
                 </div>
             </div>
 

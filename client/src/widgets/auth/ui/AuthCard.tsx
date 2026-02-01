@@ -36,7 +36,7 @@ export function AuthCard () {
 
     return (
         <div className={'w-full h-full p-2 flex justify-center items-center'}>
-            <div className={'w-1/3 h-4/11 bg-[#121212] rounded-[8] flex flex-col justify-center items-center gap-y-5'}>
+            <div className={'w-1/3 h-4/11 bg-[#121212] rounded-[8px] flex flex-col justify-center items-center gap-y-5'}>
                 <div className={'text-white'}>
                     {signInPath ? "Sign In" : "Sign Up"}
                 </div>
@@ -87,7 +87,7 @@ export function AuthCard () {
 
                     </div>
                     <button
-                        className={'h-10 w-1/7 bg-green-800 rounded-[8] text-white cursor-pointer'}
+                        className={'h-10 w-1/7 bg-green-800 rounded-[8px] text-white cursor-pointer'}
                         onClick={(e) => {
                             e.preventDefault(); // На всякий случай
                             handleSend()
