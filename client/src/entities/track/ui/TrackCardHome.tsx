@@ -19,6 +19,7 @@ export function TrackCardHome ({track}: TrackCardHomeProps) {
             <TrackImage imageUrl={imageUrl} id={track.id} className={"flex items-end"}>
                 <ToggleCardPlayButton
                     track={track}
+                    animation={'inset-0 z-2 mr-2 opacity-0 mb-0 duration-150 ease-in group-hover:opacity-100 group-hover:mb-2  group hover:scale-110 active:scale-100 active:bg-green-600'}
                 />
             </TrackImage>
             <TrackInfoHome trackId={String(track.id)} artistId={track.artistId} name={track.name} artistName={track.artist?.name || ""}/>

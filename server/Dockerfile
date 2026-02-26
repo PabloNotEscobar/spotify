@@ -1,35 +1,44 @@
-# Base
-FROM node:20-alpine AS base
+# 1️⃣ Base
+FROM node:20-slim AS base
+
 WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    openssl \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY package*.json ./
 RUN npm install
-# Сначала копируем только схему и генерируем клиент
-COPY ./prisma ./prisma/
-RUN npx prisma generate
-# Затем копируем всё остальное
-COPY . .
 
-# --- ЭТАП 1: Development ---
+COPY prisma ./prisma
+RUN npx prisma generate
+
+# 2️⃣ Development
 FROM base AS development
 CMD sh -c "npx prisma migrate deploy && npm run dev"
 
-# --- ЭТАП 2: Build ---
+# 3️⃣ Build
 FROM base AS build
+COPY . .
 RUN npm run build
 
-# --- ЭТАП 3: Production ---
-FROM node:20-alpine AS production
+# 4️⃣ Production
+FROM node:20-slim AS production
+
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y \
+    openssl \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY package*.json ./
-# Устанавливаем только prod-зависимости
-RUN npm install --only=production
+RUN npm install --omit=dev
 
 COPY --from=build /app/prisma ./prisma
 RUN npx prisma generate
 
-# Копируем результат компиляции
 COPY --from=build /app/dist ./dist
-
 
 CMD sh -c "npx prisma migrate deploy && node dist/main.js"

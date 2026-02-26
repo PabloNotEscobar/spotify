@@ -29,13 +29,13 @@ export function SearchInput ({throttleSearch}: SearchProps) {
     }
 
     return (
-        <div className={"search-wrapper"}>
+        <div className={"search-wrapper font-unica"}>
             <SearchIcon className="search-icon" onClick={onClick} />
             <input
                 type="text"
                 className="search-input"
                 value={search}
-                placeholder="Что хочешь включить?"
+                placeholder="What do you want to listen?"
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={onChange}
             />

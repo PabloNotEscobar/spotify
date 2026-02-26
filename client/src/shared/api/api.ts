@@ -1,5 +1,5 @@
 import {authRoutes} from "@/shared/api/routes";
-import {ITrack} from "@/entities/track";
+import {IArtist, ITrack} from "@/entities/track";
 
 export const getTracks = async (): Promise<ITrack[]> => {
     const response = await fetch("http://backend:4000/tracks?take=1000", {
@@ -10,6 +10,13 @@ export const getTracks = async (): Promise<ITrack[]> => {
 
 export const getOneTrack = async (id: string): Promise<ITrack> => {
     const response = await fetch('http://backend:4000/tracks' + `/${id}`, {
+        cache: 'no-store'
+    });
+    return response.json();
+};
+
+export const getOneArtist = async (id: string): Promise<IArtist> => {
+    const response = await fetch('http://backend:4000/artists' + `/${id}`, {
         cache: 'no-store'
     });
     return response.json();

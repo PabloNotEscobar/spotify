@@ -1,17 +1,23 @@
 'use client'
-import {PlayButtonCard} from "@/shared/ui/track";
 import {useToggleCardPlayback} from "@/features/player/togglePlayback/models/useToggleCardPlayback";
 import {ITrack} from "@/entities/track";
+import {PlayButton} from "@/shared/ui/buttons/PlayButton";
+import {PauseButton} from "@/shared/ui/buttons/PauseButton";
 
 interface IToggleCardPlayButton {
     track: ITrack
+    animation?: string
 }
 
-export function ToggleCardPlayButton ({track}: IToggleCardPlayButton) {
+export function ToggleCardPlayButton ({track, animation}: IToggleCardPlayButton) {
 
     const {play, playHandler, active} = useToggleCardPlayback(track)
 
     return (
-        <PlayButtonCard track={track} active={active} play={play} playHandler={playHandler} />
+            track.id === active?.id && play
+                ?
+                <PlayButton playHandler={playHandler} animation={animation}/>
+                :
+                <PauseButton playHandler={playHandler} animation={animation}/>
     )
 }

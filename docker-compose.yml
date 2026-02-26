@@ -17,9 +17,9 @@ services:
     image: bfontaine/postgres-wal2json:15-bookworm
     container_name: db
     command: postgres -c wal_level=logical
-    ports: [ "5432:5432" ]
+    ports: [ "5433:5432" ]
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_dev:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -98,6 +98,6 @@ services:
     ports: ["3000:3000"]
 
 volumes:
-  redis_data:
-  postgres_data:
-  meilibridge-data:
+#  redis_data:
+  postgres_data_dev:
+#  meilibridge-data:

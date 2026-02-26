@@ -1,5 +1,6 @@
 import $api from "@/shared/api/axios";
 import {IAuthResponse} from "@/features/auth";
+import axios from "axios";
 
 export class AuthApi {
     static async login (email: string, password: string): Promise<IAuthResponse> {
@@ -26,6 +27,16 @@ export class AuthApi {
     static async refresh (): Promise<IAuthResponse> {
         const { data } = await $api.get<IAuthResponse>(
             `/auth/refresh-token`
+        );
+        localStorage.setItem('token', data.accessToken)
+        return data;
+
+    }
+
+
+    static async refreshProxy (): Promise<IAuthResponse> {
+        const { data } = await $api.get<IAuthResponse>(
+            `/api/auth/refresh`
         );
         localStorage.setItem('token', data.accessToken)
         return data;

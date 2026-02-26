@@ -31,6 +31,8 @@ export function CreateTrackCard () {
             }
         } catch (e) {
             console.error('Ошибка поймана:', e);
+            setCreating(false)
+            alert('Не получилось добавить трек...')
         }
     }
 
@@ -60,7 +62,7 @@ export function CreateTrackCard () {
                 <label className={"input-wrapper cursor-pointer gap-x-3"} htmlFor="image-upload">
                     <AddImage />
                     <h4 className={'text-[#B3B3B3] text-[14px] overflow-x-hidden'}>
-                        Добавить изображение
+                        {image ? image.name : 'Выберите изображение'}
                     </h4>
                     <input
                         type="file"
@@ -77,12 +79,13 @@ export function CreateTrackCard () {
                 <label className={"input-wrapper cursor-pointer gap-x-3"} htmlFor="audio-upload">
                     <AddMusicFile />
                     <h4 className={'text-[14px] text-[#B3B3B3] overflow-x-hidden'}>
-                        Выберите аудио
+                        {audio ? audio.name : 'Выберите аудио'}
                     </h4>
                     <input
                         type="file"
                         accept={'audio/*'}
                         className={'cursor-pointer hidden'}
+                        placeholder={"Выберите аудио"}
                         id="audio-upload"
                         onChange={(e) => {
                             if (e.target.files)

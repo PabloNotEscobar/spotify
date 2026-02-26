@@ -7,15 +7,16 @@ interface FavoriteTrackProps {
     active: ITrack | null
     play: boolean
     playHandler: () => void
+    index: number
 }
 
-export function FavoriteTrackCardRow ({fTrack, active, play, playHandler}: FavoriteTrackProps) {
+export function FavoriteTrackCardRow ({fTrack, active, play, playHandler, index}: FavoriteTrackProps) {
     const track = fTrack.track
     return (
         <div className={"w-full h-[54px] hover:bg-[#1F1F1F] rounded-sm px-4 flex flex-row items-center relative group"} onClick={playHandler}>
             {/*<Link href={`/track/${fTrack.track?.id}`} className="absolute inset-0 z-1 cursor-default"/>*/}
             <div className={`w-4 h-full flex justify-center items-center mr-4 z-0 group-hover:hidden ${track.id === active?.id ? 'text-green-500' : 'text-white'}`}>
-                {track?.id}
+                {index + 1}
             </div>
             <div className={'w-4 h-full flex justify-center items-center text-white mr-4 z-0 hidden group-hover:flex'}>
                 {

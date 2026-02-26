@@ -29,6 +29,7 @@ export class AuthController {
   ): Promise<SignInResponseDto> {
     const tokens = await this.authService.signIn(signInDto);
 
+    console.log(tokens.refreshToken)
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       secure: false,
@@ -57,8 +58,11 @@ export class AuthController {
   @Get('refresh-token')
   async refreshToken(@Req() req: Request, @Res({passthrough: true}) res: Response ): Promise<RefreshTokenResponseDto> {
     const refreshToken = req.cookies['refreshToken'];
+    console.log(3, refreshToken)
+
 
     const tokens = await this.authService.refreshToken(refreshToken)
+    console.log(6, tokens.refreshToken)
 
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,

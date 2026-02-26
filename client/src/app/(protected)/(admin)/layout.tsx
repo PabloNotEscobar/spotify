@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {Navbar, Player} from "@/widgets/navbar";
 import "../../globals.css"
 import {LibraryBar} from "@/widgets/library";
-import {AuthProvider} from "@/features/auth/ui/AuthPrivider";
 import {AdminProvider} from "@/features/auth/ui/AdminProvider";
 import {AudioProvider} from "@/shared/providers/audio-provider";
 
@@ -29,7 +28,6 @@ export default function RootLayout({
                   <div className="flex overflow-hidden flex-row w-full h-full">
                       {children}
                   </div>
-                  <Player />
               </div>
           </AudioProvider>
       </AdminProvider>

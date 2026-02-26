@@ -2,12 +2,27 @@
 import {PlayButtonCardProps} from "@/shared/types"
 
 
-export function PlayButtonCard({ track, active, play, playHandler }: PlayButtonCardProps) {
+export function PlayButtonCard({ track, active, play, playHandler, circleDiameter = '48', iconSize = '24', color = '#22C55E'}: PlayButtonCardProps) {
 
 
     return (
-        <div onClick={playHandler} className={`bg-green-500 w-12 h-12 shadow-xl/50 rounded-full flex justify-center items-center inset-0 z-2 mr-2 opacity-0 mb-0 duration-150 ease-in group-hover:opacity-100 group-hover:mb-2  group hover:scale-110 active:scale-100 active:bg-green-600 hover:bg-green-400}`} >
-            <svg viewBox="0 0 24 24" className="w-6 h-6 flex content-center items-center justify-center">
+        <div
+            onClick={playHandler}
+            className={`bg-green-500 shadow-xl/50 rounded-full flex justify-center items-center inset-0 z-2 mr-2 opacity-0 mb-0 duration-150 ease-in group-hover:opacity-100 group-hover:mb-2  group hover:scale-110 active:scale-100 active:bg-green-600 hover:bg-green-400}`}
+            style={{
+                width: `${circleDiameter}px`,
+                height: `${circleDiameter}px`,
+                backgroundColor: color,
+            }}
+        >
+            <svg
+                viewBox="0 0 24 24"
+                className="flex content-center items-center justify-center"
+                style={{
+                    width: `${iconSize}px`,
+                    height: `${iconSize}px`,
+                }}
+            >
                 {
                     track.id === active?.id && play
                         ?

@@ -15,6 +15,10 @@ export interface PlayButtonCardProps {
     active: ITrack | null
     play: boolean
     playHandler: () => void
+    circleDiameter?: string
+    iconSize?: string
+    color?: string
+
 }
 
 

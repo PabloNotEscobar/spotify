@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AuthApi } from "@/features/auth";
 import {useRouter} from "next/navigation";
 import {useUserStore} from "@/entities/user/model/user-store";
+import {SpotifyIcon} from "@/shared/ui/navbar";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [loaded, setLoaded] = useState(false);
@@ -17,17 +18,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             try {
                 const data = await AuthApi.refresh();
                 setUser(data.user)
-
-                if (data.user.role !== 'admin') {
-                    router.replace('/');
-                    return;
-                }
-
+                setLoaded(true);
             } catch (e) {
                 setUser(null)
                 router.replace('/sign-in');
-            } finally {
-                setLoaded(true);
+                console.log(e)
             }
         };
 
@@ -38,5 +33,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return children
 
 
-    return <div>Загрузка...</div>;
+    return <div className={'flex items-center justify-center h-screen'}>
+        <SpotifyIcon />
+    </div>;
 };

@@ -102,6 +102,7 @@ export class AuthService {
   }
 
   async refreshToken(token: string): Promise<RefreshTokenResponseDto> {
+    console.log(4, token)
     if (!token) {
       throw new UnauthorizedException('Refresh token missing');
     }
@@ -121,6 +122,7 @@ export class AuthService {
         }
       },
     });
+    console.log(5, refreshToken)
 
     if (!refreshToken) {
       throw new UnauthorizedException('Invalid refresh token');
@@ -132,6 +134,7 @@ export class AuthService {
     });
 
     const tokens = await this.getTokens(refreshToken.user);
+    console.log(6, tokens)
 
     const { password, ...userWithoutPassword } = refreshToken.user;
 

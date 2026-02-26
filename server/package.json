@@ -4,7 +4,7 @@
     "dev": "nest start --watch",
     "build": "nest build",
     "start": "nest start",
-    "start:prod": "node dist/main"
+    "start:prod": "npx prisma migrate deploy && node dist/main.js"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

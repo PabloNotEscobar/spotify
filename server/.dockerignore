@@ -1,12 +1,10 @@
-# Зависимости
+make remove# Зависимости
 node_modules
 
 # Результаты сборки
 dist
 build
 
-/node_modules/@prisma/client
-/.prisma
 
 # Логи и временные файлы
 npm-debug.log*

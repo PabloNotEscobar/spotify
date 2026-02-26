@@ -19,6 +19,8 @@ export function AuthCard () {
 
 
     const handleSend = async () => {
+        console.log('NEXT_PUBLIC_API_URL:', process.env.NEXT_PUBLIC_API_URL)
+        console.log('API_URL:', process.env.INTERNAL_API_URL)
         try {
             if (signInPath) {
                 const data = await AuthApi.login(email, password);
@@ -67,6 +69,7 @@ export function AuthCard () {
                     <input
                         className="input-input"
                         placeholder="Password"
+                        type={'password'}
                         value={password}
                         onChange={(e) => {setPassword(e.target.value)}}
                     />

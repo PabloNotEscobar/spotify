@@ -55,7 +55,7 @@ export function FavoriteTracksPanel () {
 
                 </div>
                 <div className={'pt-4 w-full flex-1'}>
-                    {favTracks?.map(f => <ToggleFavoriteTrackPlay fTrack={f} key={f.track?.id}/>)}
+                    {favTracks?.map((f, index) => <ToggleFavoriteTrackPlay fTrack={f} key={f.track?.id} index={index}/>)}
                 </div>
             </div>
         </div>

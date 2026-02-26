@@ -3,10 +3,6 @@ import {ToggleFavoriteTrackPlay} from "@/features/favorite-tracks/toggle-playbac
 import {useSearchStore} from "@/widgets/search/model/search-store";
 import {ToggleSearchTrackPlay} from "@/features/track";
 
-interface SearchedItemsPanelProps {
-
-}
-
 export function SearchedItemsPanel () {
 
     const tracks = useSearchStore(state => state.foundTracks)
