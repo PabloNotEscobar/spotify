@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
         remotePatterns: [
             { protocol: 'http', hostname: 'localhost', port: '', pathname: '/static/**' },
             { protocol: 'http', hostname: 'nginx', port: '', pathname: '/static/**' },
+            { protocol: 'http', hostname: '45.144.179.210', port: '', pathname: '/static/**' },
         ],
     },
     experimental: {

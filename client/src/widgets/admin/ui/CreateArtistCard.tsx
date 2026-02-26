@@ -42,7 +42,7 @@ export function CreateArtistCard () {
                 <div className={"input-wrapper cursor-text overflow-x-hidden"}>
                     <input
                         className="input-input"
-                        placeholder="Track Name"
+                        placeholder="Artist Name"
                         value={name}
                         onChange={(e) => {setName(e.target.value)}}
                     />
