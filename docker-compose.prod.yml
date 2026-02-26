@@ -11,6 +11,7 @@
       depends_on:
         - frontend
         - backend
+      restart: on-failure
 
     frontend:
       build: ./client
