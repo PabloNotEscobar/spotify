@@ -22,13 +22,13 @@ export function RoleWarn () {
                         ?
                         <p className={'overflow-y-auto'}>
                             {`You have the "user" role, so you can't release a track on the platform.\nIf you want to test the functionality of the "admin" role write to `}
-                            <Link href="https://t.me/GuitaraMan" className={`hover:underline text-blue-600`}>@GuitaraMan</Link>
+                            <Link href="https://t.me/GuitaraMan" className={`hover:underline text-blue-600`} target="_blank" rel="noopener noreferrer">@GuitaraMan</Link>
                             {` on Telegram`}
                         </p>
                         :
                         <p className={'overflow-y-auto'}>
                             {`Congrats, you have the "admin" role!\n`}
-                            <Link href="https://t.me/GuitaraMan" className={`hover:underline text-blue-600`}>@GuitaraMan</Link>
+                            <Link href="https://t.me/GuitaraMan" className={`hover:underline text-blue-600`} target="_blank" rel="noopener noreferrer">@GuitaraMan</Link>
                         </p>
                 }
             </div>
