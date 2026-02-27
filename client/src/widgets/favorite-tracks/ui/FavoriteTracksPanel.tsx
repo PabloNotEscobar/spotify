@@ -5,6 +5,7 @@ import {useUserStore} from "@/entities/user/model/user-store";
 import {IFavoriteTrack} from "@/entities/favorite-track/types";
 import {ToggleFavoriteTrackPlay} from "@/features/favorite-tracks/toggle-playback/ui/ToggleFavoriteTrackPlay";
 import {TogglePlayerPlayButton} from "@/features/player/togglePlayback";
+import * as process from "node:process";
 
 
 export function FavoriteTracksPanel () {
@@ -34,7 +35,7 @@ export function FavoriteTracksPanel () {
                 <div className={'w-full h-69 flex flex-row items-end border-b-1 border-b-black'}>
                 <div className={'h-full aspect-square p-6 flex justify-center items-center rounded-[4px]'}>
                     <img
-                        src={`http://localhost:3000/static/playlist/liked-songs-300.jpg`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/static/playlist/liked-songs-300.jpg`}
                         draggable={false}
                         className="rounded-[4px] w-full h-full"
                     />
