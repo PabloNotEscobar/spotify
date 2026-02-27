@@ -31,7 +31,7 @@ export class AuthService {
   async signIn(dto: SignInDto): Promise<SignInResponseDto> {
     const user = await this.usersService.findOneByEmail(dto.email);
     if (!user) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Sign-up first');
     }
 
     const isPasswordValid = await bcrypt.compare(dto.password, user.password);

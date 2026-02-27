@@ -32,6 +32,7 @@ export function AuthCard () {
             }
         } catch (e) {
             console.error('Ошибка поймана:', e);
+            alert(e)
         }
     }
 
