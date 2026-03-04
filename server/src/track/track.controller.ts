@@ -11,6 +11,7 @@ import {
   UploadedFiles,
   UseGuards,
   UseInterceptors,
+  Delete
 } from '@nestjs/common';
 import { TrackService } from './track.service';
 import { CreateTrackDto } from './dto/create-track.dto';
@@ -63,5 +64,12 @@ export class TrackController {
   @Patch(':id')
   listen(@Param('id') id: string) {
     return this.trackService.listen(+id);
+  }
+
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(UserRoles.admin)
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.trackService.delete(+id);
   }
 }

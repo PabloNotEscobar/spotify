@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
             bodySizeLimit: '10mb',
         },
     },
+
+    watchOptions: {
+        pollIntervalMs: 1000,
+    },
     // webpack: (config, { dev }) => {
     //     if (dev) {
     //         config.cache = {

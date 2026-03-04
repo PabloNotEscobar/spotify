@@ -64,4 +64,10 @@ export class TrackService {
       data: { listens: { increment: 1 } },
     });
   }
+
+  async delete(id: number): Promise<Track> {
+    return this.prisma.track.delete({
+      where: { id }
+    });
+  }
 }

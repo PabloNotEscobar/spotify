@@ -5,18 +5,27 @@ import Link from "next/link";
 export default function Page () {
 
     return (
-        <div className={'w-full h-full p-2 flex flex-row justify-center items-center'}>
-            <div className={'h-full w-1/2 hover:bg-[#121212] text-white cursor-pointer text-xl rounded-[4px]'}>
-                <Link href={'/admin/create-artist'} className={'h-full w-full flex justify-center items-center'}>
-                    Create Artist
-                </Link>
-            </div>
-            <div className={'h-full w-1/2 hover:bg-[#121212] text-white cursor-pointer text-xl rounded-[4px]'}>
-                <Link href={'/admin/create-track'} className={'h-full w-full flex justify-center items-center'}>
-                    Create Track
-                </Link>
+        <div className={'w-full h-full p-2 flex flex-col justify-center items-center'}>
+            <div className={'h-1/2 w-full flex flex-row'}>
+                <div className={'h-full w-full hover:bg-[#121212] text-white cursor-pointer text-xl rounded-[4px]'}>
+                    <Link href={'/admin/create-artist'} className={'h-full w-full flex justify-center items-center'}>
+                        Create Artist
+                    </Link>
+                </div>
             </div>
 
+            <div className={'h-1/2 w-full flex flex-row'}>
+                <div className={'h-full w-1/2 hover:bg-[#121212] text-white cursor-pointer text-xl rounded-[4px]'}>
+                    <Link href={'/admin/create-track'} className={'h-full w-full flex justify-center items-center'}>
+                        Create Track
+                    </Link>
+                </div>
+                <div className={'h-full w-1/2 hover:bg-[#121212] text-white cursor-pointer text-xl rounded-[4px]'}>
+                    <Link href={'/admin/delete-track'} className={'h-full w-full flex justify-center items-center'}>
+                        Delete Track
+                    </Link>
+                </div>
+            </div>
         </div>
     )
 }

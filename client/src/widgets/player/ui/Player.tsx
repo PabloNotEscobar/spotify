@@ -2,10 +2,10 @@
 import {PlayerSettings} from "@/widgets/player/ui/PlayerSettings";
 import {NowPlaying} from "@/widgets/player/ui/NowPlaying";
 import PlayerSettingsRight from "@/widgets/player/ui/PlayerSettingsRight";
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {usePlayerStore} from "@/widgets/player/model/player-store";
+import {useAudio} from "@/shared/providers/audio-provider";
 
-let audio: HTMLAudioElement;
 
 export function Player () {
 
@@ -16,39 +16,20 @@ export function Player () {
     const volume = usePlayerStore(state => state.volume)
     const setVolume = usePlayerStore(state => state.setVolume)
     const setCurrentTime = usePlayerStore(state => state.setCurrentTime)
+    const {audioRef, fadeIn, fadeOut} = useAudio()
+    const audio = audioRef.current
+
 
     useEffect(() => {
-        if (!audio) {
-            audio = new Audio()
-            audio.src = `${active?.audio}`
-            audio.volume = volume / 100
-            audio.onloadedmetadata = () => {
-                setDuration(audio.duration)
-            }
-            audio.ontimeupdate = () => {
-                setCurrentTime(audio.currentTime)
-            }
+        audio.src = `${active?.audio}`
+        audio.volume = volume / 100
+        audio.onloadedmetadata = () => {
+            setDuration(audio.duration)
+        }
+        audio.ontimeupdate = () => {
+            setCurrentTime(audio.currentTime)
         }
     }, [])
-
-    useEffect(() => {
-        if (active?.audio) {
-            audio.pause()
-            audio.src = `${active?.audio}`
-            setPlay()
-        }
-    }, [active?.audio])
-
-    useEffect(() => {
-        if (play) {
-            console.log('play')
-            audio.play()
-        } else {
-            console.log('pause')
-            audio.pause()
-        }
-    }, [play])
-
 
 
     const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {

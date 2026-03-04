@@ -15,10 +15,6 @@ import { Prisma, User } from '@prisma/client';
 import { GetTokensDto } from './dto/get-tokens.dto';
 import { RefreshTokenResponseDto } from './dto/refresh-token-response.dto';
 
-type UserWithFavorites = Prisma.UserGetPayload<{
-  include: { favoriteTracks: true }
-}>;
-
 
 @Injectable()
 export class AuthService {
