@@ -18,7 +18,8 @@ const unicaOne = Supermercado_One({
 
 export const metadata: Metadata = {
     title: 'Spotify',
-    description: 'next js fsd tailwind',
+    description: 'next js fsd tailwind'
+
 }
 
 export default function RootLayout({

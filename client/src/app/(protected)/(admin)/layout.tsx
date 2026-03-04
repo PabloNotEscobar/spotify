@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import {Navbar, Player} from "@/widgets/navbar";
+import {Navbar} from "@/widgets/navbar";
 import "../../globals.css"
-import {LibraryBar} from "@/widgets/library";
 import {AdminProvider} from "@/features/auth/ui/AdminProvider";
 import {AudioProvider} from "@/shared/providers/audio-provider";
 

@@ -1,5 +1,4 @@
 'use client'
-import {CreateTrackCard} from "@/widgets/admin/ui/CreateTrackCard";
 import Link from "next/link";
 
 export default function Page () {

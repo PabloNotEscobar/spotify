@@ -1,9 +1,7 @@
 'use client'
 import React, {useState} from "react";
-import {useRouter} from "next/navigation";
-import {TrackApi} from "@/features/track/create-track/model/track.api";
 import './Inputs.css'
-import {AddImage, AddMusicFile} from "@/shared/ui/assets";
+import {AddImage} from "@/shared/ui/assets";
 import {ArtistApi} from "@/features/artist/api/artist.api";
 
 
