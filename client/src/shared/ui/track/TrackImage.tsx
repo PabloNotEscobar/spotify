@@ -8,7 +8,8 @@ export function TrackImage ({ id, imageUrl, children, className}: ImageProps ) {
     return (
         <div className={`relative w-full flex justify-center aspect-square`}>
             <Image
-                src={'https://nowayshop.ru' + imageUrl}
+                src={imageUrl}
+                unoptimized
                 alt={String(id)}
                 fill
                 className="object-cover rounded-[6px] select-none"
