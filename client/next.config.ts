@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
             { protocol: 'http', hostname: 'localhost', port: '', pathname: '/static/**' },
             { protocol: 'http', hostname: 'nginx', port: '', pathname: '/static/**' },
             { protocol: 'http', hostname: '45.144.179.210', port: '', pathname: '/static/**' },
+            { protocol: 'http', hostname: 'gateway', port: '80', pathname: '/static/**' },
         ],
     },
     experimental: {
