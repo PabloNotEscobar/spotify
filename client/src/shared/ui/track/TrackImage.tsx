@@ -8,7 +8,7 @@ export function TrackImage ({ id, imageUrl, children, className}: ImageProps ) {
     return (
         <div className={`relative w-full flex justify-center aspect-square`}>
             <Image
-                src={imageUrl}
+                src={`${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`}
                 alt={String(id)}
                 fill
                 className="object-cover rounded-[6px] select-none"
