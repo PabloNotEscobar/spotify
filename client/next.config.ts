@@ -10,7 +10,8 @@ const nextConfig: NextConfig = {
             { protocol: 'http', hostname: 'nginx', port: '', pathname: '/static/**' },
             { protocol: 'http', hostname: '45.144.179.210', port: '', pathname: '/static/**' },
             { protocol: 'http', hostname: 'gateway', port: '80', pathname: '/static/**' },
-            { protocol: 'https', hostname: 'nowayshop.ru', pathname: '/static/**' }
+            { protocol: 'https', hostname: 'nowayshop.ru', pathname: '/static/**' },
+            { protocol: 'https', hostname: 'flowmusic.ru', pathname: '/static/**' }
         ],
     },
     experimental: {
