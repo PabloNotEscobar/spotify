@@ -6,7 +6,7 @@ import {AudioProvider} from "@/shared/providers/audio-provider";
 
 
 export const metadata: Metadata = {
-  title: "Spotify",
+  title: "Flow Music",
   description: "next js fsd tailwind",
 };
 

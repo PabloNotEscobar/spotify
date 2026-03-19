@@ -17,8 +17,8 @@ const unicaOne = Supermercado_One({
 })
 
 export const metadata: Metadata = {
-    title: 'Spotify',
-    description: 'next js fsd tailwind'
+    title: 'Flow Music',
+    description: 'Music platform'
 
 }
 
